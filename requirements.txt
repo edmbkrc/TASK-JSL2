@@ -1,0 +1,16 @@
+streamlit
+langchain
+sentence-transformers
+pypdf
+python-docx
+python-dotenv
+huggingface-hub==0.13.4
+langchain_community==0.0.20
+langchain_community
+faiss-cpu
+textract
+groq
+langchain-groq
+PyPDF2
+langchain_google_genai
+pydantic
