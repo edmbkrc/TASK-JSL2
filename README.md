@@ -20,12 +20,12 @@ Ensure you have the following installed:
 - Python 3.9+
 - [Ollama](https://ollama.ai/) (for Llama-based processing)
 
----
 
 ### Installation
 
 1. **Clone the Repository**
    ```bash
-   git clone <repository-url>
-   cd rag-chatbot
+   git clone https://github.com/edmbkrc/TASK-JSL2.git
+   cd TASK-JSL2
+
 
