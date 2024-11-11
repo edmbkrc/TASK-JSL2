@@ -5,7 +5,8 @@ services:
     image: ollama/ollama:latest
     ports:
       - "11434:11434"
-    command: ollama serve
+    command: >
+      sh -c "ollama pull llama3.2:1b && ollama serve"
 
   app:
     build:
