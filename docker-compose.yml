@@ -1,0 +1,15 @@
+version: "3.9"
+
+services:
+  rag-chatbot-app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "8501:8501"
+    volumes:
+      - .:/app
+    environment:
+      - OLLAMA_HOST=http://0.0.0.0:11434
+    command: >
+      sh -c "ollama pull llama3.2:1b && ollama serve & streamlit run main.py --server.port=8501 --server.enableCORS=false --server.enableXsrfProtection=false"
