@@ -5,12 +5,11 @@ pypdf
 python-docx
 python-dotenv
 huggingface-hub==0.13.4
-langchain_community==0.0.20
-langchain_community
+langchain-community
 faiss-cpu
 textract
 groq
 langchain-groq
 PyPDF2
 langchain_google_genai
-pydantic
+pydantic==1.10.2
