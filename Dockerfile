@@ -1,9 +1,14 @@
 # Base image
 FROM python:3.9-slim
 
-# Install dependencies
+# Set environment variables
+ENV PYTHONUNBUFFERED=1 \
+    LANG=C.UTF-8 \
+    LC_ALL=C.UTF-8 \
+    PYTHONPATH=/app
+
+# Install system dependencies
 RUN apt-get update && apt-get install -y \
-    curl \
     build-essential \
     libpoppler-cpp-dev \
     tesseract-ocr \
@@ -12,18 +17,23 @@ RUN apt-get update && apt-get install -y \
     libsm6 \
     libxrender1 \
     libxext6 \
+    curl \
     && apt-get clean && rm -rf /var/lib/apt/lists/*
 
-# Install Python dependencies
-COPY requirements.txt .
-RUN pip install --no-cache-dir -r requirements.txt
+# Install Ollama CLI
+RUN curl -fsSL https://ollama.ai/install.sh | bash
 
-# Copy application code
-COPY . /app
+# Create app directory
 WORKDIR /app
 
-# Expose Ollama port
-EXPOSE 11434
+# Copy application files
+COPY . /app
 
-# Start Ollama server and the app
-CMD ["bash", "-c", "ollama serve & streamlit run main.py --server.port=8501 --server.address=0.0.0.0"]
+# Install Python dependencies
+RUN pip install --no-cache-dir -r requirements.txt
+
+# Expose port for Streamlit
+EXPOSE 8501
+
+# Command to start the application
+CMD ["streamlit", "run", "main.py", "--server.port=8501", "--server.enableCORS=false", "--server.enableXsrfProtection=false"]
