@@ -7,6 +7,8 @@ services:
       - "11434:11434"
     command: >
       sh -c "ollama pull llama3.2:1b && ollama serve"
+    networks:
+      - shared_network
 
   app:
     build:
@@ -18,4 +20,9 @@ services:
       - OLLAMA_HOST=http://ollama:11434
     depends_on:
       - ollama
-    command: streamlit run main.py --server.port=8501 --server.enableCORS=false
+    networks:
+      - shared_network
+
+networks:
+  shared_network:
+    driver: bridge
