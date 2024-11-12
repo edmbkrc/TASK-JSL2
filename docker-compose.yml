@@ -5,10 +5,10 @@ services:
     image: ollama/ollama:latest
     ports:
       - "11434:11434"
-    command: >
-      sh -c "ollama pull llama3.2:1b && ollama serve"
+    command: ollama serve
     networks:
       - shared_network
+    entrypoint: /bin/bash -c "ollama pull llama3.2:1b && exec ollama serve"
 
   app:
     build:
@@ -22,6 +22,7 @@ services:
       - ollama
     networks:
       - shared_network
+    command: streamlit run main.py --server.port=8501 --server.enableCORS=false
 
 networks:
   shared_network:
