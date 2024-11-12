@@ -25,7 +25,39 @@ Ensure you have the following installed:
 
 1. **Clone the Repository**
    ```bash
+   # download necessary tools for ubuntu
+   sudo apt update && sudo apt upgrade -y
+   sudo apt install -y git curl docker.io docker-compose
+   
+   # check docker and docker compose
+   docker --version
+   docker-compose --version
+   
+   # clone project
    git clone https://github.com/edmbkrc/TASK-JSL2.git
    cd TASK-JSL2
 
+   # Use Docker Compose to build and start all the services 
+   docker-compose up -d --build
+   
+   # Check if the containers are running
+   docker ps
 
+   #  IP address of your Ubuntu machine
+   hostname -I
+
+   # You can access your application using the following URLs
+   http://<Ubuntu_IP_Address>:8501
+
+   # If you encounter any issues, check the logs
+   docker-compose logs
+   docker-compose logs <service-name>  # e.g., ollama or app
+
+   # To reset and restart all services, run
+   docker-compose down
+   docker-compose up -d --build
+
+   """
+   Ensure all dependencies are correctly configured in the docker-compose.yml file. Pay special attention to commands like ollama pull llama3.2:1b.
+   Verify that the required model for Ollama is pulled correctly:
+   """
